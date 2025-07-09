@@ -1,18 +1,56 @@
-// === Element References ===
-const speedDisplay = document.getElementById("speedValue");
-const gearDisplay = document.getElementById("gearValue");
-const rpmPath = document.getElementById("rpmPath");
+let elements = {};
 
-// === Speed Display ===
-function updateSpeed(speedMps) {
-    const mph = speedMps * 2.236936;
-    speedDisplay.innerText = `${Math.round(mph)} MPH`;
+const onOrOff = state => state ? 'On' : 'Off';
+
+function setEngine(state) {
+    elements.engineValue.innerText = onOrOff(state);
 }
 
-// === Gear Display ===
-function updateGear(gear) {
-    gearDisplay.innerText = gear === 0 ? 'N' : gear;
+function updateSpeed(speedValue) {
+    elements.speedValue.innerText = `${Math.round(speedValue * 2.236936)} MPH`;
 }
+
+function updateGear(gearValue) {
+    elements.gearValue.innerText = String(gearValue);
+}
+
+function createTicks() {
+    const ticksContainer = document.querySelector('.ticks');
+    const tickCount = 10;
+    for (let i = 0; i < tickCount; i++) {
+        const tick = document.createElement('div');
+        tick.className = 'tick';
+        const angle = (i / (tickCount - 1)) * 270 - 135;
+        tick.style.transform = `rotate(${angle}deg) translateY(-85px)`;
+        ticksContainer.appendChild(tick);
+    }
+}
+
+function createCircularNumbers() {
+    const container = document.querySelector('.circular-number');
+    const count = 10;
+    const radius = 102;
+    const centerX = 150;
+    const centerY = 150;
+
+    for (let i = 0; i < count; i++) {
+        const angle = (i / (count - 1)) * 270 + 90;
+        const rad = angle * (Math.PI / 180);
+        const x = centerX + radius * Math.cos(rad);
+        const y = centerY + radius * Math.sin(rad);
+
+        const num = document.createElement('span');
+        num.className = 'number';
+        num.textContent = i;
+        num.style.left = `${x}px`;
+        num.style.top = `${y}px`;
+
+        container.appendChild(num);
+    }
+}
+
+createTicks();
+createCircularNumbers();
 
 // === RPM Arc Drawing ===
 function updateRPM(rpm) {
@@ -30,7 +68,7 @@ function updateRPM(rpm) {
         "A", 90, 90, 0, largeArcFlag, 0, end.x, end.y
     ].join(" ");
 
-    rpmPath.setAttribute("d", d);
+    elements.rpmPath.setAttribute("d", d);
 }
 
 // === Helper: Convert polar to Cartesian coordinates (for SVG arc) ===
@@ -42,20 +80,12 @@ function polarToCartesian(cx, cy, r, angleDeg) {
     };
 }
 
-// === RageMP Event Listener ===
-if (typeof mp !== 'undefined') {
-    mp.events.add("updateSpeedo", (speed, rpm, gear) => {
-        updateSpeed(speed);
-        updateRPM(rpm);
-        updateGear(gear);
-    });
-}
-
 // === Optional: Local testing ===
-document.addEventListener("keydown", (e) => {
-    if (e.key === "u") {
-        updateSpeed(Math.random() * 35);   // Simulate speed (m/s)
-        updateRPM(Math.random());          // Simulate RPM (0–1)
-        updateGear(Math.floor(Math.random() * 6)); // Simulate gear
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    elements = {
+        engineValue: document.getElementById('engineValue'),
+        speedValue: document.getElementById('speedValue'),
+        gearValue: document.getElementById('gearValue'),
+        rpmPath: document.getElementById('rpmPath')
+    };
 });
