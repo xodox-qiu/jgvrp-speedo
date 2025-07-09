@@ -1,6 +1,6 @@
 body {
   margin: 50px;
-  background: #111;
+  background: transparent !important;
   display: flex;
   justify-content: center;
   position: relative;
