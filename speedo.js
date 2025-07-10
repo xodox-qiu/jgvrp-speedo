@@ -1,4 +1,6 @@
 let elements = {};
+let currentRPM = 0;  // starts at 0
+let rpmAnimationFrame;  // used to cancel animation if needed
 
 const onOrOff = state => state ? 'On' : 'Off';
 
@@ -14,20 +16,38 @@ function setGear(gearValue) {
     elements.gearValue.innerText = String(gearValue);
 }
 
-function setRPM(rpmValue) {
-    const arc = elements.rpmPath;
-    const centerX = 100; // SVG viewBox center
+function setRPM(targetRPM) {
+    cancelAnimationFrame(rpmAnimationFrame); // stop any existing animation
+
+    const centerX = 100;
     const centerY = 100;
     const radius = 85;
+    const minAngle = 0;
+    const maxAngle = 270;
+    const speed = 0.02; // animation speed per frame (tweak this value for faster/slower response)
 
-    const minAngle = 0;     // start at 0 degrees
-    const maxAngle = 270;   // end at 270 degrees
+    function animate() {
+        const diff = targetRPM - currentRPM;
 
-    const angle = minAngle + (rpmValue * (maxAngle - minAngle));
-    const arcPath = describeArc(centerX, centerY, radius, minAngle, angle);
+        // If close enough, snap to target and end animation
+        if (Math.abs(diff) < 0.001) {
+            currentRPM = targetRPM;
+        } else {
+            currentRPM += diff * speed; // ease toward the target
+        }
 
-    arc.setAttribute("d", arcPath);
+        const angle = minAngle + currentRPM * (maxAngle - minAngle);
+        const arcPath = describeArc(centerX, centerY, radius, minAngle, angle);
+        elements.rpmPath.setAttribute("d", arcPath);
+
+        if (Math.abs(diff) >= 0.001) {
+            rpmAnimationFrame = requestAnimationFrame(animate);
+        }
+    }
+
+    animate();
 }
+
 
 // === Helper: Convert polar to Cartesian coordinates (for SVG arc) ===
 function polarToCartesian(cx, cy, r, angleDeg) {
@@ -104,7 +124,22 @@ document.addEventListener("DOMContentLoaded", () => {
         speedValue: document.getElementById('speedValue'),
         gearValue: document.getElementById('gearValue'),
         rpmPath: document.getElementById('rpmPath')
+        
     };
+        const redlineStart = 7 / 9;  // tick 8 out of 9 (normalized)
+        const redlineEnd = 9 / 9;    // tick 9
+
+        const centerX = 100;
+        const centerY = 100;
+        const radius = 85;
+        const minAngle = 0;
+        const maxAngle = 270;
+
+        const redlineAngleStart = minAngle + redlineStart * (maxAngle - minAngle);
+        const redlineAngleEnd = minAngle + redlineEnd * (maxAngle - minAngle);
+
+        const redlinePath = describeArc(centerX, centerY, radius, redlineAngleStart, redlineAngleEnd);
+        document.getElementById('rpmRedline').setAttribute('d', redlinePath);
 
     // setInterval(() => {
     //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
