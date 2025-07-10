@@ -3,6 +3,7 @@ body {
   display: flex;
   justify-content: center;
   position: relative;
+  margin: 50px;
 }
 
 .speedometer {
@@ -17,9 +18,9 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, #222 60%, #333);
+  background: radial-gradient(circle, #363636 60%, #333);
   position: relative;
-  border: 8px solid #444;
+  border: 10px solid #6d6d6d;
   box-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
 
@@ -70,11 +71,11 @@ body {
 
 
 .inside-dial {
-    border: 25px solid #444;
+    border: 25px solid #727272;
     width: 60%;
     height: 60%;
     border-radius: 50%;
-    background: radial-gradient(farthest-side, #747474 30%, #333);
+    background: radial-gradient(farthest-side, #919191 30%, #444444);
     top: calc(15% - 10px);
     left: calc(15% - 10px);
     z-index: 4;
@@ -129,7 +130,6 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 5;
-  font-family: sans-serif;
 }
 
 .number {

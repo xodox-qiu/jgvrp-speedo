@@ -6,12 +6,48 @@ function setEngine(state) {
     elements.engineValue.innerText = onOrOff(state);
 }
 
-function updateSpeed(speedValue) {
-    elements.speedValue.innerText = `${Math.round(speedValue * 2.236936)} MPH`;
+function setSpeed(speedValue) {
+    elements.speedValue.innerText = `${Math.round(speedValue * 2.236936)}`;
 }
 
-function updateGear(gearValue) {
+function setGear(gearValue) {
     elements.gearValue.innerText = String(gearValue);
+}
+
+function setRPM(rpmValue) {
+    const arc = elements.rpmPath;
+    const centerX = 100; // SVG viewBox center
+    const centerY = 100;
+    const radius = 85;
+
+    const minAngle = 0;     // start at 0 degrees
+    const maxAngle = 270;   // end at 270 degrees
+
+    const angle = minAngle + (rpmValue * (maxAngle - minAngle));
+    const arcPath = describeArc(centerX, centerY, radius, minAngle, angle);
+
+    arc.setAttribute("d", arcPath);
+}
+
+// === Helper: Convert polar to Cartesian coordinates (for SVG arc) ===
+function polarToCartesian(cx, cy, r, angleDeg) {
+    const angleRad = (angleDeg - 90) * Math.PI / 180.0;
+    return {
+        x: cx + r * Math.cos(angleRad),
+        y: cy + r * Math.sin(angleRad)
+    };
+}
+
+function describeArc(x, y, radius, startAngle, endAngle) {
+    const start = polarToCartesian(x, y, radius, endAngle);
+    const end = polarToCartesian(x, y, radius, startAngle);
+
+    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+    return [
+        "M", start.x, start.y,
+        "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+    ].join(" ");
 }
 
 function createTicks() {
@@ -52,35 +88,16 @@ function createCircularNumbers() {
 createTicks();
 createCircularNumbers();
 
-// === RPM Arc Drawing ===
-function updateRPM(rpm) {
-    const clamped = Math.min(Math.max(rpm, 0), 1); // Clamp between 0–1
-    const startAngle = -90; // left side of circle
-    const endAngle = startAngle + (clamped * 180); // fill half-circle
-
-    const start = polarToCartesian(100, 100, 90, endAngle);
-    const end = polarToCartesian(100, 100, 90, startAngle);
-
-    const largeArcFlag = clamped > 0.5 ? 1 : 0;
-
-    const d = [
-        "M", start.x, start.y,
-        "A", 90, 90, 0, largeArcFlag, 0, end.x, end.y
-    ].join(" ");
-
-    elements.rpmPath.setAttribute("d", d);
-}
-
-// === Helper: Convert polar to Cartesian coordinates (for SVG arc) ===
-function polarToCartesian(cx, cy, r, angleDeg) {
-    const angleRad = (angleDeg - 90) * Math.PI / 180.0;
-    return {
-        x: cx + r * Math.cos(angleRad),
-        y: cy + r * Math.sin(angleRad)
-    };
-}
-
 // === Optional: Local testing ===
+// document.addEventListener("DOMContentLoaded", () => {
+//     elements = {
+//         engineValue: document.getElementById('engineValue'),
+//         speedValue: document.getElementById('speedValue'),
+//         gearValue: document.getElementById('gearValue'),
+//         rpmPath: document.getElementById('rpmPath')
+//     };
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
     elements = {
         engineValue: document.getElementById('engineValue'),
@@ -88,4 +105,17 @@ document.addEventListener("DOMContentLoaded", () => {
         gearValue: document.getElementById('gearValue'),
         rpmPath: document.getElementById('rpmPath')
     };
+
+    // setInterval(() => {
+    //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
+    //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
+    //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
+    //     const engineOn = Math.random() > 0.5; // true or false
+
+    //     setSpeed(randomSpeed);
+    //     setGear(randomGear);
+    //     setRPM(randomRPM);
+    //     setEngine(engineOn);
+    // }, 1000);
 });
+
