@@ -1,27 +1,26 @@
 body {
+  margin: 0;
+  padding: 0;
   background: transparent !important;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  margin: 50px;
 }
 
 .speedometer {
   width: 300px;
   height: 300px;
-  position: relative;
-  bottom: -550px;
-  right: -750px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Ensure it's on top */
 }
 
 .dial-speedo {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, #363636 60%, #333);
+  background: radial-gradient(circle, #424242 25%, #333 90%);
   position: relative;
-  border: 10px solid #6d6d6d;
-  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+  border: 5px solid #424242;
+  box-shadow: 0 0 25px #ffffff1a;
 }
 
 .speed-display {
@@ -40,10 +39,11 @@ body {
   bottom: 140px;
   width: 100%;
   text-align: center;
-  font-size: 27px;
+  font-size: 24px;
   color: #ffffff;
-  font-family: monospace;
+  font-family: fantasy;
   z-index: 5;
+  font-weight: bold;
 }
 
 .gear-display {
@@ -64,18 +64,18 @@ body {
   width: 100%;
   text-align: center;
   font-size: 14px;
-  color: #aaa;
+  color: #dbdbdb;
   font-family: monospace;
   z-index: 5;
 }
 
 
 .inside-dial {
-    border: 25px solid #727272;
+    border: 25px solid #353535;
     width: 60%;
     height: 60%;
     border-radius: 50%;
-    background: radial-gradient(farthest-side, #919191 30%, #444444);
+    background: radial-gradient(farthest-side, #919191 20%, #353535 100%);
     top: calc(15% - 10px);
     left: calc(15% - 10px);
     z-index: 4;
@@ -87,18 +87,6 @@ body {
   font-size: 16px;
   color: white;
   font-family: monospace;
-}
-
-.fuel-icon {
-  top: 50%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-}
-
-.abs-icon {
-  top: 50%;
-  right: 20%;
-  transform: translate(50%, -50%);
 }
 
 .rpm-arc {
@@ -114,9 +102,9 @@ body {
 
 .tick {
   position: absolute;
-  width: 3px;
+  width: 1.5px;
   height: 65px;
-  background: rgb(128, 128, 128);
+  background: rgb(77, 77, 77);
   top: 85px;
   left: 49.5%;
   transform-origin: bottom center;
@@ -135,9 +123,11 @@ body {
 .number {
   position: absolute;
   color: white;
-  font-size: 12px;
-  font-family: monospace;
+  font-size: 16px;
+  font-family: fantasy;
   transform: translate(-50%, -50%);
+  font-weight: bolder;
+  -webkit-text-stroke: 0.7px rgb(29, 29, 29);
 }
 
 /* .new {

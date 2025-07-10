@@ -108,16 +108,6 @@ function createCircularNumbers() {
 createTicks();
 createCircularNumbers();
 
-// === Optional: Local testing ===
-// document.addEventListener("DOMContentLoaded", () => {
-//     elements = {
-//         engineValue: document.getElementById('engineValue'),
-//         speedValue: document.getElementById('speedValue'),
-//         gearValue: document.getElementById('gearValue'),
-//         rpmPath: document.getElementById('rpmPath')
-//     };
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
     elements = {
         engineValue: document.getElementById('engineValue'),
@@ -126,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rpmPath: document.getElementById('rpmPath')
         
     };
-        const redlineStart = 7 / 9;  // tick 8 out of 9 (normalized)
+        const redlineStart = 8 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
 
         const centerX = 100;
