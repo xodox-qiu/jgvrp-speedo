@@ -8,9 +8,9 @@ This project is commited and created by solely xodox-qiu. A speedometer design a
 
 | File  | Used for? |
 | ------------- |:-------------:|
-| speedo.html   | Basic html for the base     |
-| speedo.css    | Customize the design that is used for the speedometer |
-| speedo.js     | Function stuff that is used to create a design and some listener to the game |
+| speedo.html   | Provides the basic HTML structure of the speedometer interface     |
+| speedo.css    | Defines the visual styling and layout of the speedometer elements |
+| speedo.js     | Handles functionality, including design logic and game-related event listeners |
 
 ### What's done?
 | Functionality  | Progress  | Percentage |
