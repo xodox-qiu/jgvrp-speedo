@@ -28,7 +28,7 @@ body {
   bottom: 180px;
   width: 100%;
   text-align: center;
-  font-size: 24px;
+  font-size: 28px;
   color: white;
   font-family: monospace;
   z-index: 5;
@@ -43,7 +43,6 @@ body {
   color: #ffffff;
   font-family: fantasy;
   z-index: 5;
-  font-weight: bold;
 }
 
 .gear-display {
@@ -71,15 +70,15 @@ body {
 
 
 .inside-dial {
-    border: 25px solid #353535;
-    width: 60%;
-    height: 60%;
-    border-radius: 50%;
-    background: radial-gradient(farthest-side, #919191 20%, #353535 100%);
-    top: calc(15% - 10px);
-    left: calc(15% - 10px);
-    z-index: 4;
-    position: relative;
+  border: 25px solid #353535;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #919191 20%, #353535 100%);
+  top: calc(15% - 10px);
+  left: calc(15% - 10px);
+  z-index: 4;
+  position: relative;
 }
 
 .icon {
@@ -98,6 +97,13 @@ body {
   z-index: 2;
   transform: rotate(-180deg);
   pointer-events: none;
+}
+
+#rpmTip {
+  stroke: red;
+  stroke-width: 30;
+  stroke-linecap: butt;
+  filter: drop-shadow(0 0 2px red);
 }
 
 .tick {

@@ -1,6 +1,6 @@
 let elements = {};
-let currentRPM = 0;  // starts at 0
-let rpmAnimationFrame;  // used to cancel animation if needed
+let currentRPM = 0;
+let rpmAnimationFrame;
 
 const onOrOff = state => state ? 'On' : 'Off';
 
@@ -17,28 +17,33 @@ function setGear(gearValue) {
 }
 
 function setRPM(targetRPM) {
-    cancelAnimationFrame(rpmAnimationFrame); // stop any existing animation
+    cancelAnimationFrame(rpmAnimationFrame);
 
     const centerX = 100;
     const centerY = 100;
     const radius = 85;
     const minAngle = 0;
     const maxAngle = 270;
-    const speed = 0.02; // animation speed per frame (tweak this value for faster/slower response)
+    const speed = 0.05;
 
     function animate() {
         const diff = targetRPM - currentRPM;
 
-        // If close enough, snap to target and end animation
         if (Math.abs(diff) < 0.001) {
             currentRPM = targetRPM;
         } else {
-            currentRPM += diff * speed; // ease toward the target
+            currentRPM += diff * speed;
         }
 
         const angle = minAngle + currentRPM * (maxAngle - minAngle);
         const arcPath = describeArc(centerX, centerY, radius, minAngle, angle);
         elements.rpmPath.setAttribute("d", arcPath);
+
+        const tipLength = 2.5;
+        const tipStart = angle - tipLength;
+        const tipEnd = angle;
+        const tipPath = describeArc(centerX, centerY, radius, tipStart, tipEnd);
+        elements.rpmTip.setAttribute("d", tipPath);
 
         if (Math.abs(diff) >= 0.001) {
             rpmAnimationFrame = requestAnimationFrame(animate);
@@ -49,7 +54,6 @@ function setRPM(targetRPM) {
 }
 
 
-// === Helper: Convert polar to Cartesian coordinates (for SVG arc) ===
 function polarToCartesian(cx, cy, r, angleDeg) {
     const angleRad = (angleDeg - 90) * Math.PI / 180.0;
     return {
@@ -113,8 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
         engineValue: document.getElementById('engineValue'),
         speedValue: document.getElementById('speedValue'),
         gearValue: document.getElementById('gearValue'),
-        rpmPath: document.getElementById('rpmPath')
-        
+        rpmPath: document.getElementById('rpmPath'),
+        rpmTip: document.getElementById('rpmTip')
     };
         const redlineStart = 8 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
@@ -131,16 +135,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const redlinePath = describeArc(centerX, centerY, radius, redlineAngleStart, redlineAngleEnd);
         document.getElementById('rpmRedline').setAttribute('d', redlinePath);
 
-    // setInterval(() => {
-    //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
-    //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
-    //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
-    //     const engineOn = Math.random() > 0.5; // true or false
+    // // setInterval(() => {
+    // //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
+    // //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
+    // //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
+    // //     const engineOn = Math.random() > 0.5; // true or false
 
-    //     setSpeed(randomSpeed);
-    //     setGear(randomGear);
-    //     setRPM(randomRPM);
-    //     setEngine(engineOn);
+    // //     setSpeed(randomSpeed);
+    // //     setGear(randomGear);
+    // //     setRPM(randomRPM);
+    // //     setEngine(engineOn);
     // }, 1000);
 });
 
