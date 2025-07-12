@@ -98,7 +98,7 @@ function setEngineHealth(percent) {
     const radius = 90;
 
     const startAngle = 200;
-    const sweepAngle = 80;
+    const sweepAngle = 110;
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
@@ -111,7 +111,7 @@ function setfuelHealth(percent) {
     const radius = 90;
 
     const startAngle = 150;
-    const sweepAngle = 80;
+    const sweepAngle = 110;
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
