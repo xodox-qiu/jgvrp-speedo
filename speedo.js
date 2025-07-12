@@ -176,6 +176,16 @@ function createCircularNumbers() {
 createTicks();
 createCircularNumbers();
 
+function setFuel(fuel) {
+    elements.fuelHealth.innerText = `${(fuel * 100).toFixed(1)}%`; // optional
+    setfuelHealth(fuel); // <- update the arc visually
+}
+
+function setHealth(health) {
+    elements.engineHealth.innerText = `${(health * 100).toFixed(1)}%`; // optional
+    setEngineHealth(health); // <- update the arc visually
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     elements = {
     engineValue     : document.getElementById('engineValue'),
@@ -222,8 +232,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //     const randomEngine = Math.random(); // e.g., 0.75 for 75% health
     //     const randomfuel = Math.random();   // e.g., 0.45 for 45% fuel
 
-    //     setEngineHealth(1);
-    //     setfuelHealth(1);
+    //     setEngineHealth(randomEngine);
+    //     setfuelHealth(randomfuel);
     //     setTurnSignal(1);
     //     setSpeed(randomSpeed);
     //     setGear(randomGear);
