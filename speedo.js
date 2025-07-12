@@ -102,7 +102,7 @@ function setEngineHealth(percent) {
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
-    document.getElementById("engineHealthArc").setAttribute("d", arc);
+    document.getElementById("engine").setAttribute("d", arc);
 }
 
 function setfuelHealth(percent) {
@@ -115,7 +115,7 @@ function setfuelHealth(percent) {
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
-    document.getElementById("fuelHealthArc").setAttribute("d", arc);
+    document.getElementById("fuel").setAttribute("d", arc);
 }
 
 function polarToCartesian(cx, cy, r, angleDeg) {
@@ -178,16 +178,16 @@ createCircularNumbers();
 
 document.addEventListener("DOMContentLoaded", () => {
     elements = {
-    engineValue: document.getElementById('engineValue'),
-    speedValue : document.getElementById('speedValue'),
-    gearValue  : document.getElementById('gearValue'),
-    rpmPath    : document.getElementById('rpmPath'),
-    rpmTip     : document.getElementById('rpmTip'),
-    rpmRedline : document.getElementById('rpmRedline'),
-    headlightValue: document.getElementById('headlightValue'),
-    turnsignalValue: document.getElementById('turnsignalValue'),
-    fuelHealth: document.getElementById('fuelHealthArc'),
-    engineHealth: document.getElementById('engineHealthArc')
+    engineValue     : document.getElementById('engineValue'),
+    speedValue      : document.getElementById('speedValue'),
+    gearValue       : document.getElementById('gearValue'),
+    rpmPath         : document.getElementById('rpmPath'),
+    rpmTip          : document.getElementById('rpmTip'),
+    rpmRedline      : document.getElementById('rpmRedline'),
+    headlightValue  : document.getElementById('headlightValue'),
+    turnsignalValue : document.getElementById('turnsignalValue'),
+    fuelHealth      : document.getElementById('fuel'),
+    engineHealth    : document.getElementById('engine')
 };
         const redlineStart = 7.5 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
