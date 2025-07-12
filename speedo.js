@@ -202,9 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const redlineStart = 7.5 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
         const fuelBgStart = 150;
-        const fuelBgSweep = 80;
+        const fuelBgSweep = 110;
         const engineBgStart = 200;
-        const engineBgSweep = 80;
+        const engineBgSweep = 110;
 
         const centerX = 100;
         const centerY = 100;

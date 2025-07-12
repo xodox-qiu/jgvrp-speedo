@@ -20,6 +20,7 @@ body {
   background: radial-gradient(circle, #424242 25%, #333 90%);
   position: absolute;
   border: 5px solid #424242;
+  opacity: 1;
 }
 
 .fuel-icon {
@@ -199,7 +200,7 @@ body {
   height: 100%;
   top: 80px;
   left: 70px;
-  rotate: 30deg;
+  rotate: 20deg;
   stroke-linecap: round;
 }
 
@@ -209,14 +210,14 @@ body {
   height: 100%;
   top: 80px;
   left: 90px;
-  rotate: -102deg;
+  rotate: -120deg;
   stroke-linecap: round;
 }
 
 .arc-bg {
   fill: none;
   stroke: #363636;
-  stroke-width: 12;
+  stroke-width: 13;
   stroke-linecap: round;
 }
 
