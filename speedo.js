@@ -212,24 +212,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("fuelHealthBg").setAttribute("d", fuelBgPath);
         document.getElementById("engineHealthBg").setAttribute("d", engineBgPath);
     
-    setInterval(() => {
-        const randomSpeed = Math.random() * 50; // 0 to 50 m/s
-        const randomGear = Math.floor(Math.random() * 7); // 0 to 6
-        const randomRPM = Math.random(); // Value between 0.5 and 1.0
-        const engineOn = Math.random() > 0.5; // true or false
-        const randomState = Math.floor(Math.random() * 3); // 0, 1, or 2
-        const randomSignal = Math.floor(Math.random() * 3); // 0, 1, or 2
-        const randomEngine = Math.random(); // e.g., 0.75 for 75% health
-        const randomfuel = Math.random();   // e.g., 0.45 for 45% fuel
+    // setInterval(() => {
+    //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
+    //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
+    //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
+    //     const engineOn = Math.random() > 0.5; // true or false
+    //     const randomState = Math.floor(Math.random() * 3); // 0, 1, or 2
+    //     const randomSignal = Math.floor(Math.random() * 3); // 0, 1, or 2
+    //     const randomEngine = Math.random(); // e.g., 0.75 for 75% health
+    //     const randomfuel = Math.random();   // e.g., 0.45 for 45% fuel
 
-        setEngineHealth(1);
-        setfuelHealth(1);
-        setTurnSignal(1);
-        setSpeed(randomSpeed);
-        setGear(randomGear);
-        setRPM(randomRPM);
-        setEngine(engineOn);
-        setHeadlight(randomState);
-    }, 1000);
+    //     setEngineHealth(1);
+    //     setfuelHealth(1);
+    //     setTurnSignal(1);
+    //     setSpeed(randomSpeed);
+    //     setGear(randomGear);
+    //     setRPM(randomRPM);
+    //     setEngine(engineOn);
+    //     setHeadlight(randomState);
+    // }, 1000);
 });
 
