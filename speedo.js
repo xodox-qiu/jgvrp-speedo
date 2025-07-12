@@ -105,7 +105,7 @@ function setEngineHealth(percent) {
     document.getElementById("engineHealthArc").setAttribute("d", arc);
 }
 
-function setBodyHealth(percent) {
+function setfuelHealth(percent) {
     const centerX = 100;
     const centerY = 100;
     const radius = 90;
@@ -115,7 +115,7 @@ function setBodyHealth(percent) {
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
-    document.getElementById("bodyHealthArc").setAttribute("d", arc);
+    document.getElementById("fuelHealthArc").setAttribute("d", arc);
 }
 
 function polarToCartesian(cx, cy, r, angleDeg) {
@@ -186,13 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
     rpmRedline : document.getElementById('rpmRedline'),
     headlightValue: document.getElementById('headlightValue'),
     turnsignalValue: document.getElementById('turnsignalValue'),
-    bodyHealth: document.getElementById('bodyHealthArc'),
+    fuelHealth: document.getElementById('fuelHealthArc'),
     engineHealth: document.getElementById('engineHealthArc')
 };
         const redlineStart = 7.5 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
-        const bodyBgStart = 150;
-        const bodyBgSweep = 80;
+        const fuelBgStart = 150;
+        const fuelBgSweep = 80;
         const engineBgStart = 200;
         const engineBgSweep = 80;
 
@@ -204,32 +204,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const redlineAngleStart = minAngle + redlineStart * (maxAngle - minAngle);
         const redlineAngleEnd = minAngle + redlineEnd * (maxAngle - minAngle);
-        const bodyBgPath = describeArc(100, 100, 90, bodyBgStart, bodyBgStart + bodyBgSweep);
+        const fuelBgPath = describeArc(100, 100, 90, fuelBgStart, fuelBgStart + fuelBgSweep);
         const engineBgPath = describeArc(100, 100, 90, engineBgStart, engineBgStart + engineBgSweep);
 
         const redlinePath = describeArc(centerX, centerY, radius, redlineAngleStart, redlineAngleEnd);
         document.getElementById('rpmRedline').setAttribute('d', redlinePath);
-        document.getElementById("bodyHealthBg").setAttribute("d", bodyBgPath);
+        document.getElementById("fuelHealthBg").setAttribute("d", fuelBgPath);
         document.getElementById("engineHealthBg").setAttribute("d", engineBgPath);
     
-    // setInterval(() => {
-    //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
-    //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
-    //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
-    //     const engineOn = Math.random() > 0.5; // true or false
-    //     const randomState = Math.floor(Math.random() * 3); // 0, 1, or 2
-    //     const randomSignal = Math.floor(Math.random() * 3); // 0, 1, or 2
-    //     const randomEngine = Math.random(); // e.g., 0.75 for 75% health
-    //     const randombody = Math.random();   // e.g., 0.45 for 45% body
+    setInterval(() => {
+        const randomSpeed = Math.random() * 50; // 0 to 50 m/s
+        const randomGear = Math.floor(Math.random() * 7); // 0 to 6
+        const randomRPM = Math.random(); // Value between 0.5 and 1.0
+        const engineOn = Math.random() > 0.5; // true or false
+        const randomState = Math.floor(Math.random() * 3); // 0, 1, or 2
+        const randomSignal = Math.floor(Math.random() * 3); // 0, 1, or 2
+        const randomEngine = Math.random(); // e.g., 0.75 for 75% health
+        const randomfuel = Math.random();   // e.g., 0.45 for 45% fuel
 
-    //     setEngineHealth(1);
-    //     setBodyHealth(1);
-    //     setTurnSignal(1);
-    //     setSpeed(randomSpeed);
-    //     setGear(randomGear);
-    //     setRPM(randomRPM);
-    //     setEngine(engineOn);
-    //     setHeadlight(randomState);
-    // }, 1000);
+        setEngineHealth(1);
+        setfuelHealth(1);
+        setTurnSignal(1);
+        setSpeed(randomSpeed);
+        setGear(randomGear);
+        setRPM(randomRPM);
+        setEngine(engineOn);
+        setHeadlight(randomState);
+    }, 1000);
 });
 

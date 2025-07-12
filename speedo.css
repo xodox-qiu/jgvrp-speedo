@@ -22,12 +22,12 @@ body {
   border: 5px solid #424242;
 }
 
-.body-icon {
+.fuel-icon {
   position: absolute;
   right: 80px;
-  top: 140px;
-  width: 20px;
-  height: 20px;
+  top: 142px;
+  width: 15px;
+  height: 15px;
   z-index: 6;
 }
 
@@ -229,7 +229,7 @@ body {
   stroke: #dbdbdb;
 }
 
-.arc.body {
+.arc.fuel {
   stroke: #dbdbdb;
 }
 
