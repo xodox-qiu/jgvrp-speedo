@@ -1,11 +1,50 @@
 let elements = {};
-let currentRPM = 0;
-let rpmAnimationFrame;
+let currentRPM = 0, rpmAnimationFrame;
+let turnSignalState = 0;
+let turnSignalBlinkInterval = null;
+let blinkVisible = true;
 
 const onOrOff = state => state ? 'On' : 'Off';
 
 function setEngine(state) {
     elements.engineValue.innerText = onOrOff(state);
+}
+
+function setHeadlight(state) {
+    switch(state)
+    {
+        case 1: elements.headlightValue.src = 'img/headlight-on.png'; break;
+        case 2: elements.headlightValue.src = 'img/headlight-high.png'; break;
+        default: elements.headlightValue.src = 'img/headlight-off.png';
+    }
+}
+
+function setTurnSignal(state) {
+    if (turnSignalBlinkInterval) {
+        clearInterval(turnSignalBlinkInterval);
+        turnSignalBlinkInterval = null;
+    }
+
+    turnSignalState = state;
+
+    if (state !== 1 && state !== 2) {
+        elements.turnsignalValue.src = 'img/turn-signal-off.png'; // or a default image if needed
+        return;
+    }
+
+    const leftImage = 'img/turn-signal-left.png';
+    const rightImage = 'img/turn-signal-right.png';
+
+    elements.turnsignalValue.src = (state === 1) ? rightImage : leftImage;
+
+    turnSignalBlinkInterval = setInterval(() => {
+        blinkVisible = !blinkVisible;
+        if (blinkVisible) {
+            elements.turnsignalValue.src = (state === 1) ? rightImage : leftImage;
+        } else {
+            elements.turnsignalValue.src = 'img/turn-signal-off.png'; // Hide image (blink off)
+        }
+    }, 400); // Blink every 500ms
 }
 
 function setSpeed(speedValue) {
@@ -24,7 +63,7 @@ function setRPM(targetRPM) {
     const radius = 85;
     const minAngle = 0;
     const maxAngle = 270;
-    const speed = 0.05;
+    const speed = 0.1;
 
     function animate() {
         const diff = targetRPM - currentRPM;
@@ -53,6 +92,31 @@ function setRPM(targetRPM) {
     animate();
 }
 
+function setEngineHealth(percent) {
+    const centerX = 100;
+    const centerY = 100;
+    const radius = 90;
+
+    const startAngle = 200;
+    const sweepAngle = 80;
+    const endAngle = startAngle + (sweepAngle * percent);
+
+    const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
+    document.getElementById("engineHealthArc").setAttribute("d", arc);
+}
+
+function setBodyHealth(percent) {
+    const centerX = 100;
+    const centerY = 100;
+    const radius = 90;
+
+    const startAngle = 150;
+    const sweepAngle = 80;
+    const endAngle = startAngle + (sweepAngle * percent);
+
+    const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
+    document.getElementById("bodyHealthArc").setAttribute("d", arc);
+}
 
 function polarToCartesian(cx, cy, r, angleDeg) {
     const angleRad = (angleDeg - 90) * Math.PI / 180.0;
@@ -114,14 +178,23 @@ createCircularNumbers();
 
 document.addEventListener("DOMContentLoaded", () => {
     elements = {
-        engineValue: document.getElementById('engineValue'),
-        speedValue: document.getElementById('speedValue'),
-        gearValue: document.getElementById('gearValue'),
-        rpmPath: document.getElementById('rpmPath'),
-        rpmTip: document.getElementById('rpmTip')
-    };
-        const redlineStart = 8 / 9;  // tick 8 out of 9 (normalized)
+    engineValue: document.getElementById('engineValue'),
+    speedValue : document.getElementById('speedValue'),
+    gearValue  : document.getElementById('gearValue'),
+    rpmPath    : document.getElementById('rpmPath'),
+    rpmTip     : document.getElementById('rpmTip'),
+    rpmRedline : document.getElementById('rpmRedline'),
+    headlightValue: document.getElementById('headlightValue'),
+    turnsignalValue: document.getElementById('turnsignalValue'),
+    bodyHealth: document.getElementById('bodyHealthArc'),
+    engineHealth: document.getElementById('engineHealthArc')
+};
+        const redlineStart = 7.5 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
+        const bodyBgStart = 150;
+        const bodyBgSweep = 80;
+        const engineBgStart = 200;
+        const engineBgSweep = 80;
 
         const centerX = 100;
         const centerY = 100;
@@ -131,20 +204,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const redlineAngleStart = minAngle + redlineStart * (maxAngle - minAngle);
         const redlineAngleEnd = minAngle + redlineEnd * (maxAngle - minAngle);
+        const bodyBgPath = describeArc(100, 100, 90, bodyBgStart, bodyBgStart + bodyBgSweep);
+        const engineBgPath = describeArc(100, 100, 90, engineBgStart, engineBgStart + engineBgSweep);
 
         const redlinePath = describeArc(centerX, centerY, radius, redlineAngleStart, redlineAngleEnd);
         document.getElementById('rpmRedline').setAttribute('d', redlinePath);
+        document.getElementById("bodyHealthBg").setAttribute("d", bodyBgPath);
+        document.getElementById("engineHealthBg").setAttribute("d", engineBgPath);
+    
+    // setInterval(() => {
+    //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
+    //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
+    //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
+    //     const engineOn = Math.random() > 0.5; // true or false
+    //     const randomState = Math.floor(Math.random() * 3); // 0, 1, or 2
+    //     const randomSignal = Math.floor(Math.random() * 3); // 0, 1, or 2
+    //     const randomEngine = Math.random(); // e.g., 0.75 for 75% health
+    //     const randombody = Math.random();   // e.g., 0.45 for 45% body
 
-    // // setInterval(() => {
-    // //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
-    // //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
-    // //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
-    // //     const engineOn = Math.random() > 0.5; // true or false
-
-    // //     setSpeed(randomSpeed);
-    // //     setGear(randomGear);
-    // //     setRPM(randomRPM);
-    // //     setEngine(engineOn);
+    //     setEngineHealth(1);
+    //     setBodyHealth(1);
+    //     setTurnSignal(1);
+    //     setSpeed(randomSpeed);
+    //     setGear(randomGear);
+    //     setRPM(randomRPM);
+    //     setEngine(engineOn);
+    //     setHeadlight(randomState);
     // }, 1000);
 });
 

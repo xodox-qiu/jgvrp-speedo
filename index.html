@@ -8,10 +8,10 @@
 </head>
 <body>
     <div class="speedometer">
-        <section class="dial-speedo">        
+        <section class="dial-speedo">   
             <svg class="rpm-arc" viewBox="0 0 200 200">
                 <path id="rpmPath" d="" stroke="#dbdbdb" stroke-width="30" fill="none" stroke-linecap="butt"/>
-                <path id="rpmRedline" d="" stroke="red" stroke-opacity="0.5" stroke-width="22" fill="none" stroke-linecap="butt"/>
+                <path id="rpmRedline" d="" stroke="red" stroke-opacity="0.55" stroke-width="30" fill="none" stroke-linecap="butt"/>
                 <path id="rpmTip" d="" stroke="red" stroke-width="30" fill="none" stroke-linecap="square"/>
             </svg>
             <div class="ticks"></div>
@@ -21,6 +21,22 @@
             <div class="speed-perhour">MPH</div>
             <div class="gear-display" id="gearValue"></div>
             <div class="rpm-display">x1000 RPM</div>
+        </section>
+        <section>
+            <img class="body-icon" src="img/body-icon.png" alt="Body Status">
+            <img class="engine-icon" src="img/engine-icon.png" alt="Engine Status">
+            <img class="headlight-icon" id="headlightValue" src="img/headlight-off.png" alt="Headlight Status">
+            <img class="turnsignal-icon" id="turnsignalValue" src="img/turn-signal-off.png" alt="Signal Status">
+        </section>
+        <section class="health">
+        <svg viewBox="0 0 200 200" class="arc-svg-engine">
+            <path id="engineHealthBg" class="arc-bg" />
+            <path id="engineHealthArc" class="arc engine" />
+        </svg>
+        <svg viewBox="0 0 200 200" class="arc-svg-body">
+            <path id="bodyHealthBg" class="arc-bg" />
+            <path id="bodyHealthArc" class="arc body" />
+        </svg>
         </section>
     </div>
     <script src="speedo.js"></script>
