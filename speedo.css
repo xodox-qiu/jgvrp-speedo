@@ -19,7 +19,7 @@ body {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(66, 66, 66, 0.8) 5%, rgba(51, 51, 51, 0.8) 90%);
   position: absolute;
-  border: 5px solid #424242;
+  border: 5px solid rgba(53, 53, 53, 0.5); /* transparent border */
 }
 
 .fuel-icon {

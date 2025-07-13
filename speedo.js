@@ -8,7 +8,7 @@ let rightBlinkInterval = null;
 let leftBlinkOn = false;
 let rightBlinkOn = false;
 let indicators = 0;
-let headlight = 0;
+let headlightState = 0;
 
 function setEngine(state) {
     const button = document.getElementById('engineButton');
@@ -24,11 +24,18 @@ function setEngine(state) {
 }
 
 function setHeadlight(state) {
-    switch(state)
-    {
-        case 1: elements.headlightValue.src = 'img/headlight-on.png'; break;
-        case 2: elements.headlightValue.src = 'img/headlight-high.png'; break;
-        default: elements.headlightValue.src = 'img/headlight-off.png';
+    const indicator = document.getElementById('headlightIndicator');
+    headlightState = state;
+
+    switch (state) {
+        case 1:
+            indicator.src = 'img/headlight-on.png';
+            break;
+        case 2:
+            indicator.src = 'img/headlight-high.png';
+            break;
+        default:
+            indicator.src = 'img/headlight-off.png';
     }
 }
 
@@ -235,8 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     rpmPath         : document.getElementById('rpmPath'),
     rpmTip          : document.getElementById('rpmTip'),
     rpmRedline      : document.getElementById('rpmRedline'),
-    headlightValue  : document.getElementById('headlightValue'),
-    fuelHealth      : document.getElementById('fuel'),
+    headlightIndicator : document.getElementById('headlightIndicator'),    fuelHealth      : document.getElementById('fuel'),
     engineHealth    : document.getElementById('engine'),
     leftIndicator   : document.getElementById('leftIndicator'),
     rightIndicator  : document.getElementById('rightIndicator')
@@ -264,30 +270,30 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("fuelHealthBg").setAttribute("d", fuelBgPath);
         document.getElementById("engineHealthBg").setAttribute("d", engineBgPath);
     
-// setInterval(() => {
-//     try {
-//         const randomSpeed = Math.random() * 50;
-//         const randomGear = Math.floor(Math.random() * 7);
-//         const randomRPM = Math.random();
-//         const engineOn = Math.random() > 0.5;
-//         const randomState = Math.floor(Math.random() * 3);
-//         const randomEngine = Math.random();
-//         const randomfuel = Math.random();
-//         const randomleft = Math.random() > 0.5;
-//         const randomright = Math.random() > 0.5;
+    // setInterval(() => {
+    //     try {
+    //         const randomSpeed = Math.random() * 50;
+    //         const randomGear = Math.floor(Math.random() * 7);
+    //         const randomRPM = Math.random();
+    //         const engineOn = Math.random() > 0.5;
+    //         const randomState = Math.floor(Math.random() * 3);
+    //         const randomEngine = Math.random();
+    //         const randomfuel = Math.random();
+    //         const randomleft = Math.random() > 0.5;
+    //         const randomright = Math.random() > 0.5;
 
-//         setLeftIndicator(randomleft); // blinking ON
-//         setRightIndicator(randomright); // blinking ON
-//         setEngineHealth(randomEngine);
-//         setfuelHealth(randomfuel);
-//         setSpeed(randomSpeed);
-//         setGear(randomGear);
-//         setRPM(randomRPM);
-//         setEngine(engineOn);
-//         setHeadlight(randomState);
-//     } catch (e) {
-//         console.error("Update loop failed:", e);
-//     }
-// }, 1000);
+    //         setLeftIndicator(randomleft); // blinking ON
+    //         setRightIndicator(randomright); // blinking ON
+    //         setEngineHealth(randomEngine);
+    //         setfuelHealth(randomfuel);
+    //         setSpeed(randomSpeed);
+    //         setGear(randomGear);
+    //         setRPM(randomRPM);
+    //         setEngine(engineOn);
+    //         setHeadlight(randomState);
+    //     } catch (e) {
+    //         console.error("Update loop failed:", e);
+    //     }
+    // }, 1000);
 });
 
