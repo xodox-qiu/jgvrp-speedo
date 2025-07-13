@@ -16,7 +16,8 @@ This project is commited and created by solely xodox-qiu. A speedometer design a
 | Functionality  | Progress  | Percentage |
 | ------------- |:-------------:| :--------: | 
 | Speedometer   | Done     |100%|
-| Engine Health    | On-Progress |0%|
-| Body Health     | On-Progress |0%|
-| Headlights     | On-Progress |0%|
-| Engine On-Off|On-Progress|0%|
+| Engine Health    | Done |100%|
+|Fuel Health| Done|100%|
+| Body Health     | Will be reconsidered |?|
+| Headlights     | Done |100%|
+| Engine On-Off|Done|100%|
