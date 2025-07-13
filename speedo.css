@@ -111,11 +111,11 @@ body {
 }
 
 .inside-dial {
-  border: 25px solid rgba(53, 53, 53, 0.473); /* transparent border */
+  border: 25px solid rgba(53, 53, 53, 0.822); /* transparent border */
   width: 60%;
   height: 60%;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, rgba(145, 145, 145, 0.253) 20%, rgba(53, 53, 53, 0.445) 100%);  top: calc(15% - 10px);
+  background: radial-gradient(farthest-side, rgba(145, 145, 145, 0.253) 60%, rgba(53, 53, 53, 0.445) 100%);  top: calc(15% - 10px);
   left: calc(15% - 10px);
   z-index: 4;
   position: relative;
