@@ -3,12 +3,9 @@ let currentRPM = 0, rpmAnimationFrame;
 let turnSignalState = 0;
 let turnSignalBlinkInterval = null;
 let blinkVisible = true;
-let leftBlinkInterval = null;
-let rightBlinkInterval = null;
-let leftBlinkOn = false;
-let rightBlinkOn = false;
-let indicators = 0;
-let headlightState = 0;
+let leftBlinkInterval = null, rightBlinkInterval = null;
+let leftBlinkOn = false, rightBlinkOn = false;
+let indicators = 0, headlightState = 0, seatbeltState = 0;
 
 function setEngine(state) {
     const button = document.getElementById('engineButton');
@@ -39,6 +36,10 @@ function setHeadlights(state) {
     }
 }
 
+function setSeatbelts(state) {
+    const seatbelt = document.getElementById('seatbelts');
+    seatbelt.src = state ? 'img/seatbelt-on.png' : 'img/seatbelt-off.png';
+}
 
 function setSpeed(speedValue) {
     elements.speedValue.innerText = `${Math.round(speedValue * 2.236936)}`;
@@ -56,7 +57,7 @@ function setRPM(targetRPM) {
     const radius = 87.5;
     const minAngle = 0;
     const maxAngle = 270;
-    const speed = 0.2;
+    const speed = 0.15;
 
     function animate() {
         const diff = targetRPM - currentRPM;
@@ -239,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     engineIndicator : document.getElementById('engineIndicator'),
     speedValue      : document.getElementById('speedValue'),
     gearValue       : document.getElementById('gearValue'),
+    seatbelt        : document.getElementById('seatbelts'),
     rpmPath         : document.getElementById('rpmPath'),
     rpmTip          : document.getElementById('rpmTip'),
     rpmRedline      : document.getElementById('rpmRedline'),
@@ -282,7 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //         const randomfuel = Math.random();
     //         const randomleft = Math.random() > 0.5;
     //         const randomright = Math.random() > 0.5;
+    //         const randomseat = Math.random() > 0.5;
 
+    //         setSeatbelts(randomseat);
     //         setLeftIndicator(randomleft); // blinking ON
     //         setRightIndicator(randomright); // blinking ON
     //         setEngineHealth(randomEngine);
