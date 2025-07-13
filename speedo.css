@@ -258,8 +258,8 @@ body {
 
 .engine-button-container {
   position: absolute;
-  top: 10px;
-  left: -20px;
+  top: -10px;
+  left: 0px;
   z-index: 10;
   pointer-events: none;
 }
@@ -284,15 +284,13 @@ body {
 }
 
 .engine-indicator {
+  top: 20px;
   width: 20px;
   height: 8px;
   border-radius: 10px;
   background-color: red;
   transition: background-color 0.3s ease;
 }
-
-
-
 
 /* .new {
   color: #dbdbdb;
