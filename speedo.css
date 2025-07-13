@@ -17,10 +17,9 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, #424242 25%, #333 90%);
+  background: radial-gradient(circle, rgba(66, 66, 66, 0.8) 5%, rgba(51, 51, 51, 0.8) 90%);
   position: absolute;
   border: 5px solid #424242;
-  opacity: 1;
 }
 
 .fuel-icon {
@@ -44,11 +43,12 @@ body {
 
 .headlight-icon {
   position: absolute;
-  right: 75px;
+  right: 80px;
   bottom: 15px;
-  width: 20px;
-  height: 20px;
-  z-index: 6;
+  width: 18px;
+  height: 18px;
+  z-index: 7;
+  opacity: 0.75;
 }
 
 .turnsignal-icon {
@@ -111,12 +111,11 @@ body {
 }
 
 .inside-dial {
-  border: 25px solid #353535;
+  border: 25px solid rgba(53, 53, 53, 0.5); /* transparent border */
   width: 60%;
   height: 60%;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #919191 20%, #353535 100%);
-  top: calc(15% - 10px);
+  background: radial-gradient(farthest-side, rgba(145, 145, 145, 0.8) 20%, rgba(53, 53, 53, 0.8) 100%);  top: calc(15% - 10px);
   left: calc(15% - 10px);
   z-index: 4;
   position: relative;
@@ -138,6 +137,7 @@ body {
   z-index: 2;
   transform: rotate(-180deg);
   pointer-events: none;
+  opacity: 0.9;
 }
 
 .health {
@@ -153,15 +153,15 @@ body {
   stroke: red;
   stroke-width: 30;
   stroke-linecap: butt;
-  filter: drop-shadow(0 0 2px red);
+  filter: drop-shadow(0 0 3px red);
 }
 
 .tick {
   position: absolute;
   width: 1.5px;
-  height: 65px;
+  height: 50px;
   background: rgb(77, 77, 77);
-  top: 85px;
+  top: 100px;
   left: 49.5%;
   transform-origin: bottom center;
   rotate: -45deg;
@@ -202,6 +202,7 @@ body {
   left: 70px;
   rotate: 20deg;
   stroke-linecap: round;
+  opacity: 0.75;
 }
 
 .arc-svg-body {
@@ -212,6 +213,7 @@ body {
   left: 90px;
   rotate: -120deg;
   stroke-linecap: round;
+  opacity: 0.75;
 }
 
 .arc-bg {
@@ -233,6 +235,62 @@ body {
 .arc.fuel {
   stroke: #dbdbdb;
 }
+
+#indicator img {
+  width: 20px;
+  height: 25px;
+  opacity: 0.75;
+}
+
+.rightsignal-icon{
+  position: absolute;
+  z-index: 6;
+  right: 7px;
+  bottom: 80px;
+}
+
+.leftsignal-icon {
+  position: absolute; 
+  z-index: 6;
+  right: 23px;
+  bottom: 70px;
+}
+
+.engine-button-container {
+  position: absolute;
+  top: 10px;
+  left: -20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.engine-button {
+  width: 50px;
+  height: 50px;
+  background: #424242;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.engine-button.pressed {
+  background: #424242;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+  transform: translateY(2px);
+}
+
+.engine-indicator {
+  width: 20px;
+  height: 8px;
+  border-radius: 10px;
+  background-color: red;
+  transition: background-color 0.3s ease;
+}
+
 
 
 

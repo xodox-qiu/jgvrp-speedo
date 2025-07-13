@@ -3,11 +3,24 @@ let currentRPM = 0, rpmAnimationFrame;
 let turnSignalState = 0;
 let turnSignalBlinkInterval = null;
 let blinkVisible = true;
-
-const onOrOff = state => state ? 'On' : 'Off';
+let leftBlinkInterval = null;
+let rightBlinkInterval = null;
+let leftBlinkOn = false;
+let rightBlinkOn = false;
+let indicators = 0;
+let headlight = 0;
 
 function setEngine(state) {
-    elements.engineValue.innerText = onOrOff(state);
+    const button = document.getElementById('engineButton');
+    const indicator = document.getElementById('engineIndicator');
+
+    if (state) {
+        button.classList.add('pressed');
+        indicator.style.backgroundColor = 'limegreen';
+    } else {
+        button.classList.remove('pressed');
+        indicator.style.backgroundColor = 'red';
+    }
 }
 
 function setHeadlight(state) {
@@ -19,33 +32,6 @@ function setHeadlight(state) {
     }
 }
 
-function setTurnSignal(state) {
-    if (turnSignalBlinkInterval) {
-        clearInterval(turnSignalBlinkInterval);
-        turnSignalBlinkInterval = null;
-    }
-
-    turnSignalState = state;
-
-    if (state !== 1 && state !== 2) {
-        elements.turnsignalValue.src = 'img/turn-signal-off.png'; // or a default image if needed
-        return;
-    }
-
-    const leftImage = 'img/turn-signal-left.png';
-    const rightImage = 'img/turn-signal-right.png';
-
-    elements.turnsignalValue.src = (state === 1) ? rightImage : leftImage;
-
-    turnSignalBlinkInterval = setInterval(() => {
-        blinkVisible = !blinkVisible;
-        if (blinkVisible) {
-            elements.turnsignalValue.src = (state === 1) ? rightImage : leftImage;
-        } else {
-            elements.turnsignalValue.src = 'img/turn-signal-off.png'; // Hide image (blink off)
-        }
-    }, 400); // Blink every 500ms
-}
 
 function setSpeed(speedValue) {
     elements.speedValue.innerText = `${Math.round(speedValue * 2.236936)}`;
@@ -60,10 +46,10 @@ function setRPM(targetRPM) {
 
     const centerX = 100;
     const centerY = 100;
-    const radius = 85;
+    const radius = 87.5;
     const minAngle = 0;
     const maxAngle = 270;
-    const speed = 0.1;
+    const speed = 0.2;
 
     function animate() {
         const diff = targetRPM - currentRPM;
@@ -91,6 +77,59 @@ function setRPM(targetRPM) {
 
     animate();
 }
+
+function setLeftIndicator(state) {
+    indicators = (indicators & 0b10) | (state ? 0b01 : 0b00);
+    
+    if (state) {
+        startLeftBlinking();
+    } else {
+        stopLeftBlinking();
+    }
+}
+
+function setRightIndicator(state) {
+    indicators = (indicators & 0b01) | (state ? 0b10 : 0b00);
+
+    if (state) {
+        startRightBlinking();
+    } else {
+        stopRightBlinking();
+    }
+}
+
+function startLeftBlinking() {
+    if (leftBlinkInterval) return; // already blinking
+
+    leftBlinkInterval = setInterval(() => {
+        leftBlinkOn = !leftBlinkOn;
+        document.getElementById("leftIndicator").src = leftBlinkOn ? "img/leftsignal-on.png" : "img/leftsignal-off.png";
+    }, 400);
+}
+
+function stopLeftBlinking() {
+    clearInterval(leftBlinkInterval);
+    leftBlinkInterval = null;
+    leftBlinkOn = false;
+    document.getElementById("leftIndicator").src = "img/leftsignal-off.png";
+}
+
+function startRightBlinking() {
+    if (rightBlinkInterval) return;
+
+    rightBlinkInterval = setInterval(() => {
+        rightBlinkOn = !rightBlinkOn;
+        document.getElementById("rightIndicator").src = rightBlinkOn ? "img/rightsignal-on.png" : "img/rightsignal-off.png";
+    }, 400);
+}
+
+function stopRightBlinking() {
+    clearInterval(rightBlinkInterval);
+    rightBlinkInterval = null;
+    rightBlinkOn = false;
+    document.getElementById("rightIndicator").src = "img/rightsignal-off.png";
+}
+
 
 function setEngineHealth(percent) {
     const centerX = 100;
@@ -141,11 +180,12 @@ function describeArc(x, y, radius, startAngle, endAngle) {
 function createTicks() {
     const ticksContainer = document.querySelector('.ticks');
     const tickCount = 10;
+    
     for (let i = 0; i < tickCount; i++) {
         const tick = document.createElement('div');
         tick.className = 'tick';
         const angle = (i / (tickCount - 1)) * 270 - 135;
-        tick.style.transform = `rotate(${angle}deg) translateY(-85px)`;
+        tick.style.transform = `rotate(${angle}deg) translateY(-102px)`;
         ticksContainer.appendChild(tick);
     }
 }
@@ -188,16 +228,18 @@ function setHealth(health) {
 
 document.addEventListener("DOMContentLoaded", () => {
     elements = {
-    engineValue     : document.getElementById('engineValue'),
+    engineButton    : document.getElementById('engineButton'),
+    engineIndicator : document.getElementById('engineIndicator'),
     speedValue      : document.getElementById('speedValue'),
     gearValue       : document.getElementById('gearValue'),
     rpmPath         : document.getElementById('rpmPath'),
     rpmTip          : document.getElementById('rpmTip'),
     rpmRedline      : document.getElementById('rpmRedline'),
     headlightValue  : document.getElementById('headlightValue'),
-    turnsignalValue : document.getElementById('turnsignalValue'),
     fuelHealth      : document.getElementById('fuel'),
-    engineHealth    : document.getElementById('engine')
+    engineHealth    : document.getElementById('engine'),
+    leftIndicator   : document.getElementById('leftIndicator'),
+    rightIndicator  : document.getElementById('rightIndicator')
 };
         const redlineStart = 7.5 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
@@ -208,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const centerX = 100;
         const centerY = 100;
-        const radius = 85;
+        const radius = 87.5;
         const minAngle = 0;
         const maxAngle = 270;
 
@@ -222,24 +264,30 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("fuelHealthBg").setAttribute("d", fuelBgPath);
         document.getElementById("engineHealthBg").setAttribute("d", engineBgPath);
     
-    // setInterval(() => {
-    //     const randomSpeed = Math.random() * 50; // 0 to 50 m/s
-    //     const randomGear = Math.floor(Math.random() * 7); // 0 to 6
-    //     const randomRPM = Math.random(); // Value between 0.5 and 1.0
-    //     const engineOn = Math.random() > 0.5; // true or false
-    //     const randomState = Math.floor(Math.random() * 3); // 0, 1, or 2
-    //     const randomSignal = Math.floor(Math.random() * 3); // 0, 1, or 2
-    //     const randomEngine = Math.random(); // e.g., 0.75 for 75% health
-    //     const randomfuel = Math.random();   // e.g., 0.45 for 45% fuel
+// setInterval(() => {
+//     try {
+//         const randomSpeed = Math.random() * 50;
+//         const randomGear = Math.floor(Math.random() * 7);
+//         const randomRPM = Math.random();
+//         const engineOn = Math.random() > 0.5;
+//         const randomState = Math.floor(Math.random() * 3);
+//         const randomEngine = Math.random();
+//         const randomfuel = Math.random();
+//         const randomleft = Math.random() > 0.5;
+//         const randomright = Math.random() > 0.5;
 
-    //     setEngineHealth(randomEngine);
-    //     setfuelHealth(randomfuel);
-    //     setTurnSignal(1);
-    //     setSpeed(randomSpeed);
-    //     setGear(randomGear);
-    //     setRPM(randomRPM);
-    //     setEngine(engineOn);
-    //     setHeadlight(randomState);
-    // }, 1000);
+//         setLeftIndicator(randomleft); // blinking ON
+//         setRightIndicator(randomright); // blinking ON
+//         setEngineHealth(randomEngine);
+//         setfuelHealth(randomfuel);
+//         setSpeed(randomSpeed);
+//         setGear(randomGear);
+//         setRPM(randomRPM);
+//         setEngine(engineOn);
+//         setHeadlight(randomState);
+//     } catch (e) {
+//         console.error("Update loop failed:", e);
+//     }
+// }, 1000);
 });
 
