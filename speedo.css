@@ -17,6 +17,7 @@ body {
   bottom: 20px;
   right: 20px;
   z-index: 1000; /* Ensure it's on top */
+  user-select: none;
 }
 
 .dial-speedo {
@@ -180,16 +181,16 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 5;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .number {
   position: absolute;
   color: white;
   font-size: 16px;
-  font-family: fantasy;
+  font-family: "Bebas Neue", sans-serif;
   transform: translate(-50%, -50%);
   font-weight: bold;
-  -webkit-text-stroke: 0.6px rgb(29, 29, 29);
 }
 
 .health {
