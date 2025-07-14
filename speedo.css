@@ -4,6 +4,15 @@
   font-style: normal;
 }
 
+.watermark {
+  position: absolute;
+}
+
+.driver {
+  position: absolute;
+  left: -45px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -24,7 +33,7 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(66, 66, 66, 0.904) 5%, rgba(51, 51, 51, 0.8) 90%);
+  background: radial-gradient(circle, rgba(128, 128, 128, 0.829) 5%, rgba(51, 51, 51, 0.8) 90%);
   position: absolute;
   border: 5px solid rgb(39, 39, 39); /* transparent border */
 }
@@ -56,12 +65,11 @@ body {
   width: 20px;
   height: 20px;
   z-index: 6;
-  transition: filter 0.3s ease;
 }
 
 .headlight-icon {
   position: absolute;
-  right: 15px;
+  right: 13px;
   bottom: 75px;
   width: 24px;
   height: 18px;
@@ -209,7 +217,7 @@ body {
   left: 70px;
   rotate: 32deg;
   stroke-linecap: round;
-  opacity: 0.75;
+  opacity: 0.95;
 }
 
 .arc-svg-body {
@@ -220,7 +228,7 @@ body {
   left: 90px;
   rotate: -103deg;
   stroke-linecap: round;
-  opacity: 0.75;
+  opacity: 0.95;
 }
 
 .arc-bg {
@@ -236,11 +244,11 @@ body {
 }
 
 .arc.engine {
-  stroke: #dbdbdb;
+  stroke: #ff0000de;
 }
 
 .arc.fuel {
-  stroke: #dbdbdb;
+  stroke: #0fb3ff;
 }
 
 #indicator img {
@@ -259,7 +267,7 @@ body {
 .leftsignal-icon {
   position: absolute; 
   z-index: 6;
-  left: 110px;
+  left: 111px;
   bottom: 75px;
 }
 
