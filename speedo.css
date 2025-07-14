@@ -1,3 +1,9 @@
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -24,10 +30,11 @@ body {
 
 .seatbelt-icon {
   position: absolute;
-  right: 38px;
-  bottom: 35px;
+  right: 70px;
+  bottom: 13px;
   width: 30px;
   height: 30px;
+  rotate: 20deg;
   z-index: 6;
   transition: filter 0.3s ease;
 }
@@ -53,16 +60,12 @@ body {
 
 .headlight-icon {
   position: absolute;
-  right: 85px;
-  bottom: 12px;
-  width: 18px;
+  right: 15px;
+  bottom: 75px;
+  width: 24px;
   height: 18px;
   z-index: 7;
   opacity: 0.75;
-}
-
-#engineValue {
-  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .speed-display {
@@ -72,41 +75,44 @@ body {
   text-align: center;
   font-size: 28px;
   color: white;
-  font-family: monospace;
+  font-family: "Bebas Neue", sans-serif;
   z-index: 5;
 }
 
 .speed-perhour {
   position: absolute;
-  bottom: 140px;
+  bottom: 145px;
   width: 100%;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   color: #ffffff;
-  font-family: fantasy;
+  font-family: "Bebas Neue", sans-serif;
   z-index: 5;
+  transform: scaleY(1.2); /* 1.0 is normal, 1.2 is 20% taller */
+  letter-spacing: -1px;
 }
 
 .gear-display {
   position: absolute;
-  bottom: 100px;
+  bottom: 103px;
   width: 100%;
   text-align: center;
   font-size: 28px;
   color: white;
-  font-weight: bold;
-  font-family: monospace;
+  font-style: italic;
+  font-family: "Bebas Neue", sans-serif;
   z-index: 5;
 }
 
 .rpm-display {
   position: absolute;
-  bottom: 80px;
-  width: 100%;
+  left: 30px;
+  bottom: 70px;
+  width: 80%;
   text-align: center;
-  font-size: 14px;
+  font-size: 9px;
   color: #dbdbdb;
-  font-family: monospace;
+  font-family: "Bebas Neue", sans-serif;
   z-index: 5;
 }
 
@@ -151,18 +157,18 @@ body {
 
 #rpmTip {
   stroke: red;
-  stroke-width: 30;
+  stroke-width: 27;
   stroke-linecap: butt;
-  filter: drop-shadow(0 0 3px red);
+  filter: drop-shadow(0 0 1.5px red);
 }
 
 .tick {
   position: absolute;
   width: 1.5px;
-  height: 50px;
-  background: rgb(77, 77, 77);
-  top: 100px;
-  left: 49.5%;
+  height: 35px;
+  background: rgb(54, 54, 54);
+  top: 115px;
+  left: 49.75%;
   transform-origin: bottom center;
   rotate: -45deg;
   z-index: 4;
@@ -200,7 +206,7 @@ body {
   height: 100%;
   top: 80px;
   left: 70px;
-  rotate: 20deg;
+  rotate: 32deg;
   stroke-linecap: round;
   opacity: 0.75;
 }
@@ -211,7 +217,7 @@ body {
   height: 100%;
   top: 80px;
   left: 90px;
-  rotate: -120deg;
+  rotate: -103deg;
   stroke-linecap: round;
   opacity: 0.75;
 }
@@ -237,29 +243,29 @@ body {
 }
 
 #indicator img {
-  width: 20px;
-  height: 25px;
+  width: 25px;
+  height: 30px;
   opacity: 0.75;
 }
 
 .rightsignal-icon{
   position: absolute;
   z-index: 6;
-  right: 4px;
-  bottom: 85px;
+  right: 100px;
+  bottom: 67.5px;
 }
 
 .leftsignal-icon {
   position: absolute; 
   z-index: 6;
-  right: 20px;
-  bottom: 78px;
+  left: 110px;
+  bottom: 75px;
 }
 
 .engine-button-container {
   position: absolute;
   top: -10px;
-  left: 0px;
+  left: 5px;
   z-index: 10;
   pointer-events: none;
 }

@@ -145,7 +145,7 @@ function setEngineHealth(percent) {
     const radius = 90;
 
     const startAngle = 200;
-    const sweepAngle = 110;
+    const sweepAngle = 80;
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
@@ -158,7 +158,7 @@ function setfuelHealth(percent) {
     const radius = 90;
 
     const startAngle = 150;
-    const sweepAngle = 110;
+    const sweepAngle = 80;
     const endAngle = startAngle + (sweepAngle * percent);
 
     const arc = describeArc(centerX, centerY, radius, startAngle, endAngle);
@@ -193,7 +193,7 @@ function createTicks() {
         const tick = document.createElement('div');
         tick.className = 'tick';
         const angle = (i / (tickCount - 1)) * 270 - 135;
-        tick.style.transform = `rotate(${angle}deg) translateY(-102px)`;
+        tick.style.transform = `rotate(${angle}deg) translateY(-115px)`;
         ticksContainer.appendChild(tick);
     }
 }
@@ -253,9 +253,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const redlineStart = 7.5 / 9;  // tick 8 out of 9 (normalized)
         const redlineEnd = 9 / 9;    // tick 9
         const fuelBgStart = 150;
-        const fuelBgSweep = 110;
+        const fuelBgSweep = 80;
         const engineBgStart = 200;
-        const engineBgSweep = 110;
+        const engineBgSweep = 80;
 
         const centerX = 100;
         const centerY = 100;
@@ -289,8 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //         setSeatbelts(randomseat);
     //         setLeftIndicator(randomleft); // blinking ON
     //         setRightIndicator(randomright); // blinking ON
-    //         setEngineHealth(randomEngine);
-    //         setfuelHealth(randomfuel);
+    //         setEngineHealth(1);
+    //         setfuelHealth(1);
     //         setSpeed(randomSpeed);
     //         setGear(randomGear);
     //         setRPM(randomRPM);
