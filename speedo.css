@@ -190,7 +190,7 @@ body {
 .number {
   position: absolute;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   font-family: "Bebas Neue", sans-serif;
   transform: translate(-50%, -50%);
   font-weight: bold;
