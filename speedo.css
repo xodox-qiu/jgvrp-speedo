@@ -4,8 +4,12 @@
   font-style: normal;
 }
 
-.watermark {
+.watermark-icon {
   position: absolute;
+  width: 70px;
+  height: 70px;
+  right: -10px;
+  bottom: -30px;
 }
 
 body {
