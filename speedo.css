@@ -4,14 +4,6 @@
   font-style: normal;
 }
 
-.watermark-icon {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  right: -10px;
-  bottom: -30px;
-}
-
 body {
   margin: 0;
   padding: 0;
