@@ -172,11 +172,13 @@ body {
 
 .tick {
   position: absolute;
-  width: 1.5px;
-  height: 35px;
-  background: rgb(54, 54, 54);
-  top: 115px;
-  left: 49.75%;
+  width: 0px;
+  height: 0px;
+  top: 111px;
+  left: 49.3%;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-top: 39px solid rgb(39, 39, 39); /* color of the triangle */
   transform-origin: bottom center;
   rotate: -45deg;
   z-index: 4;
