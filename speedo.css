@@ -7,15 +7,17 @@
 body {
   margin: 0;
   padding: 0;
-  background: transparent !important;
+  background: black;
+  /* background: transparent !important; */
 }
 
 .watermark {
   position: absolute;
-  width: 60px;
-  height: 35px;
-  right: -10px;
-  bottom: -15px;
+  width: 75px;
+  height: 25px;
+  right: 106px;
+  top: 76px;
+  z-index: 7;
 }
 
 .speedometer {
@@ -39,11 +41,11 @@ body {
 
 .seatbelt-icon {
   position: absolute;
-  right: 70px;
-  bottom: 13px;
-  width: 30px;
-  height: 30px;
-  rotate: 20deg;
+  right: 60px;
+  bottom: 11px;
+  width: 40px;
+  height: 40px;
+  rotate: 15deg;
   z-index: 6;
   transition: filter 0.3s ease;
 }
@@ -70,15 +72,15 @@ body {
   position: absolute;
   right: 13px;
   bottom: 75px;
-  width: 24px;
-  height: 18px;
+  width: 26px;
+  height: 20px;
   z-index: 7;
   opacity: 0.75;
 }
 
 .speed-display {
   position: absolute;
-  bottom: 180px;
+  bottom: 165px;
   width: 100%;
   text-align: center;
   font-size: 28px;
@@ -89,7 +91,7 @@ body {
 
 .speed-perhour {
   position: absolute;
-  bottom: 145px;
+  bottom: 135px;
   width: 100%;
   text-align: center;
   font-size: 20px;
@@ -102,7 +104,7 @@ body {
 
 .gear-display {
   position: absolute;
-  bottom: 103px;
+  bottom: 90px;
   width: 100%;
   text-align: center;
   font-size: 28px;
@@ -178,7 +180,7 @@ body {
   left: 49.3%;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
-  border-top: 39px solid rgb(39, 39, 39); /* color of the triangle */
+  border-top: 39px solid rgba(39, 39, 39, 0.856); /* color of the triangle */
   transform-origin: bottom center;
   rotate: -45deg;
   z-index: 4;
@@ -249,27 +251,27 @@ body {
 }
 
 .arc.fuel {
-  stroke: #0fb3ff;
+  stroke: #00ccff;
 }
 
 #indicator img {
   width: 25px;
   height: 30px;
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 .rightsignal-icon{
   position: absolute;
   z-index: 6;
-  right: 100px;
-  bottom: 67.5px;
+  right: 90px;
+  bottom: 72px;
 }
 
 .leftsignal-icon {
   position: absolute; 
   z-index: 6;
-  left: 111px;
-  bottom: 75px;
+  left: 100px;
+  bottom: 72px;
 }
 
 .engine-button-container {
