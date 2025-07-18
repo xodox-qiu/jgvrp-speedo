@@ -12,11 +12,17 @@ function setEngine(state) {
     const indicator = document.getElementById('engineIndicator');
 
     if (state) {
-        button.classList.add('pressed');
-        indicator.style.backgroundColor = 'limegreen';
+        button.classList.add('pressed', 'on');
+        const green = 'limegreen';
+        indicator.style.backgroundColor = green;
+        indicator.style.boxShadow = '0 0 6px rgba(0,255,0,0.8)';
+        button.style.borderColor = green;
     } else {
-        button.classList.remove('pressed');
-        indicator.style.backgroundColor = 'red';
+        button.classList.remove('pressed', 'on');
+        const red = 'red';
+        indicator.style.backgroundColor = red;
+        indicator.style.boxShadow = '0 0 6px rgba(255,0,0,0.8)';
+        button.style.borderColor = red;
     }
 }
 

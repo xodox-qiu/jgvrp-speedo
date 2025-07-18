@@ -274,6 +274,16 @@ body {
   bottom: 72px;
 }
 
+.engine-bg {
+  position: absolute;
+  width: 57px;
+  height: 57px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background-color: #474747;
+}
+
 .engine-button-container {
   position: absolute;
   top: -10px;
@@ -283,12 +293,15 @@ body {
 }
 
 .engine-button {
-  width: 50px;
-  height: 50px;
-  background: #424242;
+  --engine-color: red;
+  width: 45px;
+  height: 45px;
+  position: relative;
+  background: radial-gradient(circle at 30% 30%, #5e5e5e, #2c2c2c);
   border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  border: 2px solid var(--engine-color);
   display: flex;
+  box-shadow: inset 0 0 3px 3px #2c2c2c;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
@@ -296,18 +309,36 @@ body {
 }
 
 .engine-button.pressed {
-  background: #424242;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
-  transform: translateY(2px);
+  background: radial-gradient(circle at 30% 30%, #3a3a3a, #1e1e1e);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 3px 6px rgba(0,0,0,0.7),
+    0 1px 2px rgba(255,255,255,0.1);
+  transform: translateY(0.1px);
 }
 
 .engine-indicator {
-  top: 20px;
-  width: 20px;
-  height: 8px;
-  border-radius: 10px;
-  background-color: red;
-  transition: background-color 0.3s ease;
+  position: absolute;
+  width: 13px;
+  height: 5px;
+  top: 6px;
+  border-radius: 5px;
+  background-color: var(--engine-color);
+  box-shadow: 0 0 6px var(--engine-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.engine-label {
+  position: absolute;
+  color: white;
+  font-size: 6.5px;
+  font-family: "Bebas Neue", sans-serif;
+  text-align: center;
+  top: 59%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+  text-shadow: 0 0 2px black;
 }
 
 /* .new {
