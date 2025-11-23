@@ -17,6 +17,6 @@ This project is commited and created by solely xodox-qiu. A speedometer design a
 | Engine Health    | Done |100%|
 |Fuel Health| Done|100%|
 | Body Health     | Done |100%|
-| Headlights     | On-Progress |50%|
+| Headlights     | Done|100%|
 |Turn Signal|Done|100%|
 | Engine On-Off|Done|100%|
