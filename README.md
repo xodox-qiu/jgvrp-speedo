@@ -1,10 +1,8 @@
 ## JGVRP Speedometer Project
 
-#### Work is still in progress...
-
 This project is commited and created by solely xodox-qiu. A speedometer design and fully functional for JGVRP - RageMP server.
 
-### What used?
+### What is this used for?
 
 | File  | Used for? |
 | ------------- |:-------------:|
@@ -18,7 +16,7 @@ This project is commited and created by solely xodox-qiu. A speedometer design a
 | Speedometer   | Done     |100%|
 | Engine Health    | Done |100%|
 |Fuel Health| Done|100%|
-| Body Health     | Will be reconsidered |?|
+| Body Health     | Done |100%|
 | Headlights     | On-Progress |50%|
 |Turn Signal|Done|100%|
 | Engine On-Off|Done|100%|
